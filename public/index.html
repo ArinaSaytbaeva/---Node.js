@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TechStore - как Ozon</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <div class="header">
+        <div class="header-content">
+            <a href="/" class="logo">Tech<span>Store</span></a>
+            
+            <!-- ПОИСК -->
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Поиск товаров..." onkeyup="filterProducts()">
+                <button onclick="filterProducts()">🔍</button>
+            </div>
+            
+            <div class="user-info">
+                <a href="/orders.html" class="orders-link">📦 Мои заказы</a>
+                <span class="user-name" id="userName">👤 Гость</span>
+                <a href="/login.html" class="login-btn" id="loginLink">Войти</a>
+                <button class="logout-btn" id="logoutBtn" onclick="logout()" style="display: none;">Выйти</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Фильтры -->
+    <div class="filters-container">
+        <div class="filters-content">
+            <h3>Фильтры</h3>
+            <div class="filter-group">
+                <label>Категория:</label>
+                <select id="categoryFilter" onchange="filterProducts()">
+                    <option value="all">Все категории</option>
+                    <option value="Смартфоны">Смартфоны</option>
+                    <option value="Ноутбуки">Ноутбуки</option>
+                    <option value="Наушники">Наушники</option>
+                    <option value="Аксессуары">Аксессуары</option>
+                    <option value="Планшеты">Планшеты</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Цена:</label>
+                <div class="price-range">
+                    <input type="number" id="minPrice" placeholder="от" onkeyup="filterProducts()">
+                    <span>-</span>
+                    <input type="number" id="maxPrice" placeholder="до" onkeyup="filterProducts()">
+                </div>
+            </div>
+            <div class="filter-group">
+                <label>Сортировка:</label>
+                <select id="sortBy" onchange="filterProducts()">
+                    <option value="default">По умолчанию</option>
+                    <option value="price_asc">Цена: по возрастанию</option>
+                    <option value="price_desc">Цена: по убыванию</option>
+                    <option value="name_asc">Название: А-Я</option>
+                    <option value="name_desc">Название: Я-А</option>
+                </select>
+            </div>
+            <button class="reset-filters" onclick="resetFilters()">Сбросить фильтры</button>
+        </div>
+    </div>
+
+    <!-- Админ панель -->
+    <div id="adminPanel" class="admin-panel" style="display: none;">
+        <h2>➕ Добавить товар</h2>
+        <div class="add-product-form">
+            <input type="text" id="productName" placeholder="Название товара">
+            <input type="number" id="productPrice" placeholder="Цена">
+            <input type="text" id="productCategory" placeholder="Категория">
+            <input type="text" id="productDesc" placeholder="Описание">
+            <input type="url" id="productImage" placeholder="URL картинки">
+            <div id="imagePreview" style="display: none;">
+                <img id="previewImg" style="max-width: 100px;">
+            </div>
+            <button onclick="addProduct()">Добавить товар</button>
+        </div>
+    </div>
+
+    <!-- Основной контент -->
+    <div class="main-container">
+        <div class="products-section">
+            <div id="products-count" class="products-count"></div>
+            <div id="products" class="products-grid"></div>
+        </div>
+
+        <div class="cart-section">
+            <div class="cart-card">
+                <div class="cart-title">🛒 Корзина</div>
+                <div id="cart-items" class="cart-items">
+                    <div class="empty-cart">Корзина пуста</div>
+                </div>
+                <div id="cart-total" class="cart-total" style="display: none;">
+                    <div class="total-row">
+                        <span>Товары</span>
+                        <span id="subtotal">0 ₽</span>
+                    </div>
+                    <div class="total-row final">
+                        <span>Итого</span>
+                        <span id="total">0 ₽</span>
+                    </div>
+                    <button class="checkout-btn" onclick="checkout()">Оформить заказ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
